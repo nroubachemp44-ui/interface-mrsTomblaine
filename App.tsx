@@ -23,6 +23,7 @@ import {
   preloadAllData,
   fetchSportsData,
   fetchImages,
+  fetchDbVersion,
 } from "./services/geminiService";
 
 // Constants
@@ -114,12 +115,17 @@ const App: React.FC = () => {
   // Calendar State
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  // Version tracking for auto-refresh
+  const [dbVersion, setDbVersion] = useState<number>(0);
+
   // Inactivity Logic
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const initData = async () => {
       await preloadAllData();
+      const version = await fetchDbVersion();
+      setDbVersion(version);
       await refreshData();
     };
     initData();
@@ -158,14 +164,28 @@ const App: React.FC = () => {
     window.addEventListener("keydown", handleUserActivity);
     resetInactivityTimer();
 
+    // Polling for remote updates (every 5 seconds)
+    const interval = setInterval(async () => {
+      const newVersion = await fetchDbVersion();
+      if (newVersion !== 0 && dbVersion !== 0 && newVersion !== dbVersion) {
+        console.log("Remote update detected, refreshing data...");
+        setDbVersion(newVersion);
+        await preloadAllData(true); // Force reload from server
+        await refreshData();
+      } else if (dbVersion === 0) {
+        setDbVersion(newVersion);
+      }
+    }, 5000);
+
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      clearInterval(interval);
       window.removeEventListener("mousemove", handleUserActivity);
       window.removeEventListener("touchstart", handleUserActivity);
       window.removeEventListener("click", handleUserActivity);
       window.removeEventListener("keydown", handleUserActivity);
     };
-  }, [activeContent, isScreensaverActive]);
+  }, [activeContent, isScreensaverActive, dbVersion]);
 
   // --- CALENDAR LOGIC ---
 
@@ -542,6 +562,7 @@ const App: React.FC = () => {
           onClose={() => setActiveContent(ContentType.NONE)}
           appMode={mode}
           onConfigurationChange={refreshData}
+          version={dbVersion}
         />
       )}
     </div>

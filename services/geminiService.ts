@@ -26,8 +26,8 @@ export const generateSlogan = async (): Promise<string> => {
 };
 
 // --- DB INIT ---
-export const preloadAllData = async () => {
-  await dbService.init();
+export const preloadAllData = async (force = false) => {
+  await dbService.init(force);
 };
 
 // --- DATA ACCESSORS (Async Wrappers) ---
@@ -64,32 +64,35 @@ export const updateAdminPin = async (pin: string) => {
   await dbService.setAdminPin(pin);
 };
 
+export const fetchDbVersion = async (): Promise<number> => {
+  try {
+    const res = await fetch('/api/db/version');
+    const data = await res.json();
+    return data.version || 0;
+  } catch (e) {
+    return 0;
+  }
+};
+
 // --- CRUD WRAPPERS ---
 
 // Agenda
 export const getAgenda = async (): Promise<SportsEvent[]> => await dbService.getAll('agenda');
-export const setAgenda = async (data: SportsEvent[]) => {
-  for (const item of data) await dbService.put('agenda', item);
-};
 export const addAgendaItem = async (item: SportsEvent) => await dbService.put('agenda', item);
 export const deleteAgendaItem = async (id: string) => await dbService.delete('agenda', id);
 
 
 // Leagues
 export const getLeagues = async (): Promise<League[]> => await dbService.getAll('leagues');
-export const setLeagues = async (data: League[]) => { for (const i of data) await dbService.put('leagues', i); };
 export const addLeagueItem = async (item: League) => await dbService.put('leagues', item);
 export const deleteLeagueItem = async (id: string) => await dbService.delete('leagues', id);
 
 // Rooms
 export const getRooms = async (): Promise<Room[]> => await dbService.getAll('rooms');
-export const setRooms = async (data: Room[]) => { for (const i of data) await dbService.put('rooms', i); };
 export const addRoomItem = async (item: Room) => await dbService.put('rooms', item);
 export const deleteRoomItem = async (id: string) => await dbService.delete('rooms', id);
 
-// Admin Bookings
-export const getBookings = async (): Promise<Booking[]> => await dbService.getAll('bookings');
-export const updateBooking = async (item: Booking) => await dbService.put('bookings', item);
+
 
 
 // --- MAIN FETCH ---
@@ -101,7 +104,7 @@ export const fetchSportsData = async (type: ContentType, query: string = ""): Pr
     case ContentType.AGENDA: return await getAgenda();
     case ContentType.LEAGUES: return await getLeagues();
     case ContentType.RENTAL: return await getRooms();
-    case ContentType.ADMIN: return await getBookings();
+    case ContentType.ADMIN: return [];
     case ContentType.PRESENTATION: return await fetchPresentationData();
 
     case ContentType.SEARCH:

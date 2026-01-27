@@ -69,6 +69,24 @@ const persistencePlugin = () => ({
         return;
       }
 
+      if (req.url === '/api/db/version' && req.method === 'GET') {
+        try {
+          if (fs.existsSync(dbPath)) {
+            const stats = fs.statSync(dbPath);
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ version: stats.mtimeMs }));
+          } else {
+            res.statusCode = 200;
+            res.end(JSON.stringify({ version: 0 }));
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: 'Failed to get version' }));
+        }
+        return;
+      }
+
       next();
     });
   }

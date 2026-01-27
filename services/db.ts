@@ -287,8 +287,8 @@ class DatabaseService {
   private data: FullDatabase | null = null;
   private syncInProgress = false;
 
-  async init(): Promise<void> {
-    if (this.data) return;
+  async init(force = false): Promise<void> {
+    if (this.data && !force) return;
 
     try {
       const response = await fetch('/api/db/load');

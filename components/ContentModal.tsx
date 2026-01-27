@@ -69,6 +69,7 @@ interface ContentModalProps {
   onClose: () => void;
   appMode: AppMode;
   onConfigurationChange?: () => void;
+  version?: number;
 }
 
 type AdminTab =
@@ -166,6 +167,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
   onClose,
   appMode,
   onConfigurationChange,
+  version,
 }) => {
   const [data, setData] = useState<any[]>([]);
   const [presentationData, setPresentationData] =
@@ -218,7 +220,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
       }
     };
     init();
-  }, [type]);
+  }, [type, version]);
 
   // Map Initialization Effect
   useEffect(() => {
