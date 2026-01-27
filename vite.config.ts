@@ -48,8 +48,8 @@ const persistencePlugin = () => ({
       // Handle remote git update
       if (req.url === '/api/update-code' && req.method === 'POST') {
         console.log('Starting remote update...');
-        // Execute git pull followed by npm install
-        exec('git pull && npm install', (error, stdout, stderr) => {
+        // Execute git pull origin main followed by npm install
+        exec('git pull origin main && npm install', (error, stdout, stderr) => {
           if (error) {
             console.error(`Update error: ${error}`);
             res.statusCode = 500;

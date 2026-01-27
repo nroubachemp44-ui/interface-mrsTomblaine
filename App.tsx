@@ -299,7 +299,7 @@ const App: React.FC = () => {
               <p
                 className={`font-sport font-bold uppercase tracking-[0.2em] ${isHandicap ? "text-3xl text-black" : "text-xl text-neutral-200"}`}
               >
-                des Sports • Anis
+                des Sports • Tomblaine
               </p>
               <div
                 className={`h-1 w-8 ${isHandicap ? "bg-black h-2" : "bg-white"}`}
