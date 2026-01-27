@@ -1,0 +1,7 @@
+{
+  "name": "Maison Régionale des Sports - Tomblaine",
+  "description": "Portail interactif et institutionnel pour la Maison Régionale des Sports, incluant un mode écran de veille et des fonctionnalités d'accessibilité avancées.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
