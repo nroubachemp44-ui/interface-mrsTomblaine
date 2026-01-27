@@ -1163,7 +1163,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                         Fonctionnement
                       </h4>
                       <p className="text-sm text-neutral-400 leading-relaxed">
-                        Cette fonction permet de mettre a jour le code vers la nouvelle version.
+                        Cette fonction permet de mettre a jour l'interface vers la nouvelle version.
                       </p>
                     </div>
 
