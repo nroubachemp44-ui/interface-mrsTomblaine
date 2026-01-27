@@ -86,7 +86,7 @@ const Screensaver: React.FC<ScreensaverProps> = ({
       <div className="relative z-10 flex flex-col items-center pt-20 md:pt-32">
         <div className="w-48 md:w-64 mb-8 flex items-center justify-center">
           <img
-            src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/cc/Logo_R%C3%A9gion_Grand_Est_-_2022.svg/langfr-250px-Logo_R%C3%A9gion_Grand_Est_-_2022.svg.png"
+            src="/public/logoGE.png"
             alt="Région Grand Est"
             className="w-full h-auto drop-shadow-2xl"
           />

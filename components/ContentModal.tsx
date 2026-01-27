@@ -1443,7 +1443,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
           {/* Header Image */}
           <div className="w-full h-64 md:h-80 rounded-3xl overflow-hidden relative shadow-2xl mb-8 group">
             <img
-              src="https://lh5.googleusercontent.com/p/AF1QipMBdsmN5EZmtWiV8Zz1tr1106AJOWBszTHcRHDQ=s0-k-no"
+              src="/image/mrdsTomblaine.jpg"
               alt="Maison des Sports"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000"
             />
@@ -1664,7 +1664,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
           <div className="flex items-center gap-6">
             {!isHandicap && (
               <img
-                src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/cc/Logo_R%C3%A9gion_Grand_Est_-_2022.svg/langfr-250px-Logo_R%C3%A9gion_Grand_Est_-_2022.svg.png"
+                src="/public/logoGE.png"
                 alt="Logo"
                 className="h-12 w-auto object-contain mr-2"
               />
