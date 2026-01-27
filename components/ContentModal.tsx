@@ -1186,7 +1186,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                       ) : (
                         <>
                           <RefreshCcw />
-                          Lancer la mise à jour GitHub
+                          Lancer la mise à jour
                         </>
                       )}
                     </button>
@@ -1194,10 +1194,6 @@ const ContentModal: React.FC<ContentModalProps> = ({
                 </div>
 
                 <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div className={`p-6 rounded-2xl ${isHandicap ? "bg-white border-2 border-black" : "bg-neutral-800/50 border border-neutral-700"}`}>
-                    <span className="block text-xs font-bold text-neutral-500 uppercase mb-1">Version actuelle</span>
-                    <span className="text-xl font-mono font-bold text-white">Production 1.0.2</span>
-                  </div>
                   <div className={`p-6 rounded-2xl ${isHandicap ? "bg-white border-2 border-black" : "bg-neutral-800/50 border border-neutral-700"}`}>
                     <span className="block text-xs font-bold text-neutral-500 uppercase mb-1">Dernière vérification</span>
                     <span className="text-xl font-mono font-bold text-white">{new Date().toLocaleDateString()}</span>
