@@ -1443,7 +1443,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
           {/* Header Image */}
           <div className="w-full h-64 md:h-80 rounded-3xl overflow-hidden relative shadow-2xl mb-8 group">
             <img
-              src="/image/mrdsTomblaine.jpg"
+              src="/public/mrdsTomblaine.jpg"
               alt="Maison des Sports"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000"
             />
