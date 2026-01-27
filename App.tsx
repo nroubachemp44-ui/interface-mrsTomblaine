@@ -299,7 +299,7 @@ const App: React.FC = () => {
               <p
                 className={`font-sport font-bold uppercase tracking-[0.2em] ${isHandicap ? "text-3xl text-black" : "text-xl text-neutral-200"}`}
               >
-                des Sports • Tomblaine
+                des Sports • Anis
               </p>
               <div
                 className={`h-1 w-8 ${isHandicap ? "bg-black h-2" : "bg-white"}`}
@@ -311,11 +311,10 @@ const App: React.FC = () => {
         <div
           className={`
            flex-grow w-full mx-auto transition-all duration-500
-           ${
-             isHandicap
-               ? "flex flex-col justify-end px-6 pb-6 h-[55vh]"
-               : "flex flex-col justify-center px-4 pb-4 overflow-hidden"
-           }
+           ${isHandicap
+              ? "flex flex-col justify-end px-6 pb-6 h-[55vh]"
+              : "flex flex-col justify-center px-4 pb-4 overflow-hidden"
+            }
         `}
         >
           {isHandicap && (
@@ -333,10 +332,9 @@ const App: React.FC = () => {
           <div
             className={`
               w-full
-              ${
-                isHandicap
-                  ? "grid grid-cols-2 grid-rows-2 gap-6 h-[85%]"
-                  : "grid gap-6 h-full max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-4 auto-cols-fr"
+              ${isHandicap
+                ? "grid grid-cols-2 grid-rows-2 gap-6 h-[85%]"
+                : "grid gap-6 h-full max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-4 auto-cols-fr"
               }
            `}
           >
@@ -455,10 +453,9 @@ const App: React.FC = () => {
                   onClick={() => setActiveContent(item.id)}
                   className={`
                     group relative overflow-hidden text-left transition-all duration-300 shadow-md hover:shadow-2xl
-                    ${
-                      isHandicap
-                        ? "bg-white border-8 border-black hover:bg-yellow-300 flex flex-col justify-center items-center p-4 rounded-3xl w-full h-full"
-                        : `w-full h-full rounded-3xl hover:scale-[1.02] active:scale-[0.98] bg-neutral-900/40 backdrop-blur-sm border border-white/10 hover:border-white/30 flex flex-col ${getGridClass(item.id)}`
+                    ${isHandicap
+                      ? "bg-white border-8 border-black hover:bg-yellow-300 flex flex-col justify-center items-center p-4 rounded-3xl w-full h-full"
+                      : `w-full h-full rounded-3xl hover:scale-[1.02] active:scale-[0.98] bg-neutral-900/40 backdrop-blur-sm border border-white/10 hover:border-white/30 flex flex-col ${getGridClass(item.id)}`
                     }
                   `}
                 >
@@ -482,11 +479,10 @@ const App: React.FC = () => {
                     <div
                       className={`
                             flex items-center justify-center flex-shrink-0
-                            ${
-                              isHandicap
-                                ? "text-black w-24 h-24"
-                                : "text-white w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 group-hover:bg-white group-hover:text-[#0047BB] transition-all"
-                            }
+                            ${isHandicap
+                          ? "text-black w-24 h-24"
+                          : "text-white w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 group-hover:bg-white group-hover:text-[#0047BB] transition-all"
+                        }
                         `}
                     >
                       {getIcon(item.iconName, isHandicap ? 72 : 32)}
