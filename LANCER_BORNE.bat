@@ -5,7 +5,7 @@ cd /d "%~dp0"
 :: --- CONFIGURATION ---
 :: Si vous avez un domaine fixe Ngrok, écrivez-le ici (ex: ma-borne.ngrok-free.app)
 :: Sinon, laissez vide (SET NGROK_DOMAIN=)
-SET NGROK_DOMAIN=
+SET NGROK_DOMAIN=subvitreous-lovably-tania.ngrok-free.dev
 :: ---------------------
 
 echo ==========================================
