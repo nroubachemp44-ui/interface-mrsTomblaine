@@ -1163,9 +1163,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                         Fonctionnement
                       </h4>
                       <p className="text-sm text-neutral-400 leading-relaxed">
-                        Cette fonction permet de synchroniser le code de cette borne avec votre dépôt **GitHub**.
-                        En cliquant sur le bouton ci-dessous, la borne va exécuter un `git pull` pour récupérer les dernières modifications
-                        et un `npm install` pour mettre à jour les dépendances si nécessaire.
+                        Cette fonction permet de mettre a jour le code vers la nouvelle version.
                       </p>
                     </div>
 
