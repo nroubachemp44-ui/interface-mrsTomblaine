@@ -1336,7 +1336,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                   "Réservez nos espaces directement sur l'application."}
               </p>
             </div>
-            {rentalConfig?.qrCodeImage && (
+            {/* {rentalConfig?.qrCodeImage && (
               <div
                 className={`flex-shrink-0 p-4 bg-white rounded-xl ${isHandicap ? "border-4 border-black" : ""}`}
               >
@@ -1346,7 +1346,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                   className="w-32 h-32 md:w-40 md:h-40 object-contain"
                 />
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="flex flex-col gap-8">

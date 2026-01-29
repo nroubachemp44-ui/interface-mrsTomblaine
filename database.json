@@ -16,8 +16,8 @@
             "statLeagues": "60+ Ligues"
         },
         "rental": {
-            "qrCodeImage": "/public/qrcode.png",
-            "headerText": "Les réservations se font directement sur l'application dédiée. Scannez le QR code pour y accéder."
+            "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mrs-tomblaine.fr/reservation",
+            "headerText": "Allez vers l'acceuil pour les reservations"
         },
         "security": {
             "pin": "0000"
