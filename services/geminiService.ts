@@ -2,6 +2,56 @@
 import { ContentType, SportsEvent, ImageConfig, Room, League, Booking, PresentationContent, RentalConfig } from "../types";
 import { dbService } from "./db";
 
+// Keep images in memory to prevent reloading delay
+const imageCache: HTMLImageElement[] = [];
+
+export const preloadImageAssets = async () => {
+  try {
+    // Fetch all data in parallel to collect URLs
+    const [imageConfig, pres, rooms, agenda, rental] = await Promise.all([
+      fetchImages(),
+      fetchPresentationData(),
+      getRooms(),
+      getAgenda(),
+      fetchRentalConfig()
+    ]);
+
+    const images: string[] = [];
+
+    // 1. Global Image Config
+    if (imageConfig.screensaver) images.push(imageConfig.screensaver);
+    Object.values(imageConfig.dashboard).forEach(url => images.push(url));
+
+    // 2. Presentation Images
+    if (pres.heroImage) images.push(pres.heroImage);
+
+    // 3. Room Images
+    rooms.forEach(r => {
+      if (r.image) images.push(r.image);
+    });
+
+    // 4. Agenda Images
+    agenda.forEach(a => {
+      if (a.image) images.push(a.image);
+    });
+
+    // 5. Rental QR Code
+    if (rental.qrCodeImage) images.push(rental.qrCodeImage);
+
+    // Preload each unique image
+    const uniqueImages = [...new Set(images.filter(Boolean))];
+    console.log(`Preloading ${uniqueImages.length} images...`);
+
+    uniqueImages.forEach(url => {
+      const img = new Image();
+      img.src = url;
+      imageCache.push(img);
+    });
+  } catch (error) {
+    console.error("Failed to preload images:", error);
+  }
+};
+
 // --- SERVICE FUNCTIONS ---
 
 const SLOGANS = [

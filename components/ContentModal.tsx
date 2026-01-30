@@ -1336,7 +1336,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                   "Réservez nos espaces directement sur l'application."}
               </p>
             </div>
-            {/* {rentalConfig?.qrCodeImage && (
+            {rentalConfig?.qrCodeImage && (
               <div
                 className={`flex-shrink-0 p-4 bg-white rounded-xl ${isHandicap ? "border-4 border-black" : ""}`}
               >
@@ -1346,7 +1346,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                   className="w-32 h-32 md:w-40 md:h-40 object-contain"
                 />
               </div>
-            )} */}
+            )}
           </div>
 
           <div className="flex flex-col gap-8">
@@ -1530,9 +1530,9 @@ const ContentModal: React.FC<ContentModalProps> = ({
                     <Clock className="flex-shrink-0 mt-1 opacity-80" />
                     <div>
                       <span className="block font-bold uppercase text-xs opacity-70 mb-1">
-                        Horaires
+                        Nos horaires d'accueil
                       </span>
-                      <p className="font-medium">Lun - Ven : 8h30 - 17h30</p>
+                      <p className="font-medium">de 8h à 12h et de 13h45 à 16h45</p>
                     </div>
                   </div>
 
@@ -1540,10 +1540,10 @@ const ContentModal: React.FC<ContentModalProps> = ({
                     <Phone className="flex-shrink-0 mt-1 opacity-80" />
                     <div>
                       <span className="block font-bold uppercase text-xs opacity-70 mb-1">
-                        Téléphone
+                        Notre téléphone
                       </span>
                       <p className="font-medium font-mono text-xl">
-                        03 83 18 87 02
+                        03 83 18 87 00
                       </p>
                     </div>
                   </div>
@@ -1552,10 +1552,10 @@ const ContentModal: React.FC<ContentModalProps> = ({
                     <Mail className="flex-shrink-0 mt-1 opacity-80" />
                     <div>
                       <span className="block font-bold uppercase text-xs opacity-70 mb-1">
-                        Email
+                        Notre courriel
                       </span>
                       <p className="font-medium text-base truncate">
-                        contact@cros-grandest.com
+                        mrs.accueil@grandest.fr
                       </p>
                     </div>
                   </div>

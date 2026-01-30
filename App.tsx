@@ -24,6 +24,7 @@ import {
   fetchSportsData,
   fetchImages,
   fetchDbVersion,
+  preloadImageAssets,
 } from "./services/geminiService";
 
 // Constants
@@ -127,6 +128,7 @@ const App: React.FC = () => {
       const version = await fetchDbVersion();
       setDbVersion(version);
       await refreshData();
+      await preloadImageAssets(); // Cache images in memory
     };
     initData();
   }, []);
@@ -136,6 +138,7 @@ const App: React.FC = () => {
     // Refresh events for the widget
     const events = await fetchSportsData(ContentType.AGENDA);
     setUpcomingEvents(events || []);
+    await preloadImageAssets(); // Ensure new images are also cached
   };
 
   const resetInactivityTimer = () => {
