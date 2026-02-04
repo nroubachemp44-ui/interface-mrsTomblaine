@@ -103,6 +103,19 @@ const persistencePlugin = () => ({
 
       next();
     });
+
+    // Background Auto-Sync: Attempt to push every 60 seconds
+    // This handles cases where the kiosk was offline during usage.
+    setInterval(() => {
+      exec('git push', (error, stdout, stderr) => {
+        // Only log if it's not just "Everything up to date" to generate less noise
+        // Note: 'git push' usually prints "Everything up to date" to stderr/stdout depending on version/config, but we can just ignore errors safely.
+        if (!error && !stderr.includes('Everything up to date') && !stdout.includes('Everything up to date')) {
+          // If meaningful output exists
+          console.log('[Background Sync] Git push attempted.');
+        }
+      });
+    }, 60000); // Check every 60 seconds
   }
 });
 
