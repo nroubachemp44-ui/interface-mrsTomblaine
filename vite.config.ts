@@ -17,6 +17,20 @@ const persistencePlugin = () => ({
         req.on('end', () => {
           try {
             fs.writeFileSync(dbPath, body);
+
+            // Auto-commit and push mechanism
+            // We use 'git' commands directly. Note: This assumes git is available in PATH.
+            exec('git add database.json && git commit -m "Auto-update database.json from Kiosk" && git push', (error, stdout, stderr) => {
+              if (error) {
+                console.warn('[Auto-Sync] Git commit/push failed (likely offline or no changes):', error.message);
+                // We do NOT return an error to the client, because local save succeeded.
+                // If the error is just "nothing to commit", it's fine.
+                // If it's a network error, we just wait for the next save to try pushing again.
+              } else {
+                console.log('[Auto-Sync] Successfully committed and pushed changes.');
+              }
+            });
+
             res.statusCode = 200;
             res.end(JSON.stringify({ success: true }));
           } catch (e) {
