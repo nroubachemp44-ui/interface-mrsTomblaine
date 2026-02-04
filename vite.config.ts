@@ -126,6 +126,9 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: '0.0.0.0',
       allowedHosts: true,
+      watch: {
+        ignored: ['**/database.json']
+      }
     },
     plugins: [react(), persistencePlugin()],
     define: {
