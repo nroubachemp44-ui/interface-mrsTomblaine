@@ -202,6 +202,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
   const isHandicap = appMode === AppMode.HANDICAP;
 
   // Initial Load
+  // Initial Load & Type Change (Resets Admin Auth)
   useEffect(() => {
     const init = async () => {
       if (
@@ -213,6 +214,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
         setImageConfig(await fetchImages());
       }
       if (type === ContentType.ADMIN) {
+        // Only reset auth when explicitly entering the Admin view
         setIsAdminAuthenticated(false);
         setAdminPassword("");
         setLoginError(false);
@@ -220,7 +222,34 @@ const ContentModal: React.FC<ContentModalProps> = ({
       }
     };
     init();
-  }, [type, version]);
+  }, [type]); // Removed 'version' dependency here
+
+  // Data Refresh on Version Change (Does NOT reset Admin Auth)
+  useEffect(() => {
+    const refresh = async () => {
+      // If we are just updating data because of a remote push or auto-save
+      if (
+        type !== ContentType.NONE &&
+        type !== ContentType.SEARCH
+      ) {
+        // Reload data respecting current context
+        if (type === ContentType.ADMIN && isAdminAuthenticated) {
+          // If already authenticated, just reload the list data
+          await loadAdminData(activeAdminTab);
+        } else if (type !== ContentType.ADMIN) {
+          await loadData();
+        }
+        // Always refresh images/config
+        setImageConfig(await fetchImages());
+        if (type === ContentType.PRESENTATION || (type === ContentType.ADMIN && activeAdminTab === 'PRESENTATION')) {
+          setPresentationData(await fetchPresentationData());
+        }
+      }
+    };
+    if (version !== 0) {
+      refresh();
+    }
+  }, [version]); // Reacts only to version changes
 
   // Map Initialization Effect
   useEffect(() => {
@@ -1270,7 +1299,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {filteredLeagues.map((league: any, idx: number) => (
                 <div
-                  key={league.id || idx}
+                  key={league.id ? `${league.id}-${idx}` : `league-${idx}`}
                   className={`flex flex-col p-6 rounded-2xl transition-all duration-300 ${isHandicap ? "bg-white border-4 border-black shadow-lg hover:scale-[1.02]" : "bg-neutral-800 border border-neutral-700 hover:border-[#0047BB] hover:shadow-xl hover:-translate-y-1"}`}
                 >
                   <div className="flex-1">
@@ -1352,7 +1381,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
           <div className="flex flex-col gap-8">
             {data.map((room: any, idx) => (
               <div
-                key={room.id || idx}
+                key={room.id ? `room-${room.id}-${idx}` : `room-${idx}`}
                 className={`rounded-2xl overflow-hidden shadow-lg flex flex-col md:flex-row ${isHandicap ? "bg-white border-8 border-black" : "bg-neutral-800 border border-neutral-700"}`}
               >
                 <div
@@ -1593,7 +1622,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
         <div className={`flex flex-col gap-6 overflow-y-auto pb-20 pr-2`}>
           {data.map((item: any, idx) => (
             <div
-              key={item.id || idx}
+              key={item.id ? `agenda-${item.id}-${idx}` : `agenda-${idx}`}
               className={`p-6 rounded-2xl border-l-[12px] transition-all duration-300 relative overflow-hidden group ${isHandicap ? "bg-white border-4 border-black text-black" : "bg-neutral-800 border-neutral-700 hover:bg-neutral-750"}`}
             >
               <div className="flex flex-col md:flex-row gap-6">

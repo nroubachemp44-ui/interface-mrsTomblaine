@@ -401,9 +401,9 @@ const App: React.FC = () => {
                         </div>
                       </div>
                       <div className="grid grid-cols-7 gap-2 text-center mb-4">
-                        {["L", "M", "M", "J", "V", "S", "D"].map((d) => (
+                        {["L", "M", "M", "J", "V", "S", "D"].map((d, index) => (
                           <span
-                            key={d}
+                            key={`${d}-${index}`}
                             className="text-sm font-bold text-neutral-300"
                           >
                             {d}
