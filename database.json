@@ -16,8 +16,8 @@
             "statLeagues": "60+ Ligues"
         },
         "rental": {
-            "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mrs-tomblaine.fr/reservation",
-            "headerText": "Allez vers l'acceuil pour les reservations"
+            "qrCodeImage": "/public/qrcode.png",
+            "headerText": "Scannez le QrCode pour télécharger la fiche d'inscription planiweb a completer "
         },
         "security": {
             "pin": "5451"
